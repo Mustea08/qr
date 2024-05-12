@@ -18,7 +18,9 @@
       const web = 'https://www.noury.ch/app-herunterladen';
 
       if (/Android/i.test(userAgent)) {
-        window.location.replace(android);
+        try { window.location.navigator('scan://') } catch (err) { console.log(err) } finally {
+          window.location.replace(android);
+        }
       } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
         window.location.replace(apple);
       } else {
