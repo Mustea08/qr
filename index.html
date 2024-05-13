@@ -17,11 +17,11 @@
       const apple = 'https://apps.apple.com/ch/app/noury/id1577361582';
       const web = 'https://www.noury.ch/app-herunterladen';
 
-       if (/Android/i.test(userAgent)) {
-         try{window.location.replace('scan://api.noury.ch')}catch(err){console.log(err)}
+      if (/Android/i.test(userAgent)) {
+        try { window.location.replace('scan://home') } catch (err) { console.log(err) }
         window.location.replace(android);
       } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-         try{window.location.replace('scan://')}catch(err){console.log(err)}
+        try { window.location.replace('scan://') } catch (err) { console.log(err) }
         window.location.replace(apple);
       } else {
         window.location.replace(web);
