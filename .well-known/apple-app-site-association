@@ -3,7 +3,10 @@
     "apps": [],
     "details": [
       {
-        "appID": "332BLUYDQC.ch.noury",
+        "appID": [
+          "332BLUYDQC.ch.noury",
+          "332BLUYDQC.app.noury.ch"
+        ],
         "paths": [
           "*"
         ]
@@ -12,7 +15,8 @@
   },
   "webcredentials": {
     "apps": [
-      "332BLUYDQC.ch.noury"
+      "332BLUYDQC.ch.noury",
+      "332BLUYDQC.app.noury.ch"
     ]
   }
 }
