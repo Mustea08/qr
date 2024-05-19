@@ -93,7 +93,7 @@
             function redirectToApp() {
                 var start = new Date().getTime();
                 // Try to open the app
-                window.location = appScheme;
+                window.location.href = appScheme;
 
                 // After 2 seconds, if the app hasn't opened, redirect to the app store
                 setTimeout(function() {
