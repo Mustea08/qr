@@ -70,56 +70,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Redirect</title>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Define the custom URL scheme and URLs
-            var appScheme = "scan://tabnav/home/cabinet_id=1234"; // Replace with your app's custom URL scheme
-            var playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury"; // Replace with your Android app's Play Store URL
-            var appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582"; // Replace with your iOS app's App Store URL
-            var websiteURL = "https://www.noury.ch/app-herunterladen"; // Replace with your website URL
+         <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Define the custom URL scheme and URLs
+      var appScheme = "scan://tabnav/home/open_with_deep_link/cabinet_id=1234"; // Replace with your app's custom URL scheme
+      var playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury"; // Replace with your Android app's Play Store URL
+      var appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582"; // Replace with your iOS app's App Store URL
+      var websiteURL = "https://www.noury.ch/app-herunterladen"; // Replace with your website URL
 
-            function isMobile() {
-                var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                return (/android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent)) && !window.MSStream;
-            }
+      function isMobile() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        return (/android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent)) && !window.MSStream;
+      }
 
-            function isAndroid() {
-                return /android/i.test(navigator.userAgent);
-            }
+      function isAndroid() {
+        return /android/i.test(navigator.userAgent);
+      }
 
-            function isIOS() {
-                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            }
+      function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      }
 
-            function redirectToApp() {
-                var now = Date.now();
+      function redirectToApp() {
+        var now = Date.now();
 
-                // After 2 seconds, if the app hasn't opened, redirect to the app store
-               setTimeout(function() {
-                 setTimeout(function() {
-                    // If the time hasn't changed much, it means the app wasn't opened
-                    if (Date.now() - now < 1500) {
-                        if (isAndroid()) {
-                            window.location = playStoreURL;
-                        } else if (isIOS()) {
-                            window.location = appStoreURL;
-                        } else {
-                            window.location = websiteURL;
-                        }
-                    }
-                }, 1300);
-
-                // Try to open the app
-                window.location = appScheme;
-            }
-            }
-
-            // Redirect to the app or appropriate store/website
-            if (isAndroid() || isIOS()) {
-                redirectToApp();
-            }else {
+        // After 2 seconds, if the app hasn't opened, redirect to the app store
+        setTimeout(function () {
+          setTimeout(function () {
+            // If the time hasn't changed much, it means the app wasn't opened
+            if (Date.now() - now < 1500) {
+              if (isAndroid()) {
+                window.location = playStoreURL;
+              } else if (isIOS()) {
+                window.location = appStoreURL;
+              } else {
                 window.location = websiteURL;
+              }
             }
-        });
+          }, 1300);
+
+          // Try to open the app
+          window.location = appScheme;
+        })
+      }
+
+      // Redirect to the app or appropriate store/website
+      if (isAndroid() || isIOS()) {
+        redirectToApp();
+      } else {
+        window.location = websiteURL;
+      }
+    });
+  </script>
     </script>
 </head>
 <body>
