@@ -91,30 +91,32 @@
             }
 
             function redirectToApp() {
-                var start = new Date().getTime();
-                // Try to open the app
-                window.location.href = appScheme;
+                var now = Date.now();
 
                 // After 2 seconds, if the app hasn't opened, redirect to the app store
-                setTimeout(function() {
-                    var end = new Date().getTime();
-                    if (end - start < 2000) {
+               setTimeout(function() {
+                 setTimeout(function() {
+                    // If the time hasn't changed much, it means the app wasn't opened
+                    if (Date.now() - now < 1500) {
                         if (isAndroid()) {
                             window.location = playStoreURL;
-                            window.location.href = appScheme;
                         } else if (isIOS()) {
                             window.location = appStoreURL;
                         } else {
                             window.location = websiteURL;
                         }
                     }
-                }, 1500);
+                }, 1300);
+
+                // Try to open the app
+                window.location = appScheme;
+            }
             }
 
             // Redirect to the app or appropriate store/website
-            if (isMobile()) {
+            if (isAndroid() || isIOS()) {
                 redirectToApp();
-            } else {
+            }else {
                 window.location = websiteURL;
             }
         });
