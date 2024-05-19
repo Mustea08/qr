@@ -1,76 +1,36 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Store</title>
-  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
 </head>
 
 <body>
-  <script>
-    // const getUserAgent = () => {
-    //   const userAgent = navigator.userAgent;
-
-    //   const android = 'https://play.google.com/store/apps/details?id=ch.noury';
-    //   const apple = 'https://apps.apple.com/ch/app/noury/id1577361582';
-    //   const web = 'https://www.noury.ch/app-herunterladen';
-
-    //   if (/Android/i.test(userAgent)) {
-    //     try { window.location.replace('scan://home') } catch (err) { console.log(err) }
-    //     window.location.replace(android);
-    //   } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-    //     try { window.location.replace('scan://') } catch (err) { console.log(err) }
-    //     window.location.replace(apple);
-    //   } else {
-    //     window.location.replace(web);
-    //   }
-    // }
-    // document.addEventListener('DOMContentLoaded', getUserAgent);
-
+  <!-- <script>
     const getUserAgent = () => {
-    const userAgent = navigator.userAgent;
+      const userAgent = navigator.userAgent;
+      const supportsCustomURLScheme = !!window.matchMedia(`url(${encodeURIComponent('scan://')}):after`).matches;
 
-    // Check if the custom URL scheme exists
-    const supportsCustomURLScheme =!!window.matchMedia(`url(${encodeURIComponent('scan://')}):after`).matches;
 
-    let url;
-    if (supportsCustomURLScheme) {
-      // If the custom URL scheme exists, try to open the app using it
-      try {
-        window.location.replace('scan://tabnav/home/cabinet_id=if-28-4-2022-977631');
-      } catch (err) {
-        console.log('Cannot navigate to the app using the custom URL scheme.');
+      const android = 'https://play.google.com/store/apps/details?id=ch.noury';
+      const apple = 'https://apps.apple.com/ch/app/noury/id1577361582';
+      const web = 'https://www.noury.ch/app-herunterladen';
+
+      if (/Android/i.test(userAgent)) {
+        try { window.location.replace('scan://tabnav/home/cabinet_id=if-28-4-2022-977631') } catch (err) { console.log('can not navigate to the app') }
+        window.location.replace(android);
+      } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+        try { window.location.replace('scan://') } catch (err) { console.log('can not navigate to the app') }
+        window.location.replace(apple);
+      } else {
+        window.location.replace(web);
       }
     }
-
-    // Fallback to existing logic for non-supporting devices
-    if (/Android/i.test(userAgent)) {
-      url = 'https://play.google.com/store/apps/details?id=ch.noury';
-    } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-      url = 'https://apps.apple.com/ch/app/noury/id1577361582';
-    } else {
-      url = 'https://www.noury.ch/app-herunterladen';
-    }
-
-    // Redirect to the appropriate location
-    window.location.replace(url);
-  };
-  document.addEventListener('DOMContentLoaded', getUserAgent);
-  </script>
-</body>
-
-</html>
- -->
-
- <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Redirect</title>
-    <script>
-         <script>
+    document.addEventListener('DOMContentLoaded', getUserAgent);
+  </script> -->
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Define the custom URL scheme and URLs
       var appScheme = "scan://tabnav/home/open_with_deep_link/cabinet_id=1234"; // Replace with your app's custom URL scheme
@@ -122,8 +82,65 @@
       }
     });
   </script>
+</body>
+
+</html>
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Redirect</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function redirectToAppOrStore() {
+                var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                var appScheme = 'yourapp://'; // Replace with your app's custom URL scheme
+                var appStoreUrl = 'https://apps.apple.com/app/yourapp'; // Replace with your app's App Store URL
+                var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.yourapp'; // Replace with your app's Play Store URL
+                var websiteUrl = 'https://www.yourwebsite.com'; // Replace with your website URL
+
+                function isAndroid() {
+                    return /android/i.test(userAgent);
+                }
+
+                function isiOS() {
+                    return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+                }
+
+                function openApp() {
+                    window.location.href = appScheme;
+                    setTimeout(function() {
+                        if (isiOS()) {
+                            window.location.href = appStoreUrl;
+                        } else if (isAndroid()) {
+                            window.location.href = playStoreUrl;
+                        } else {
+                            window.location.href = websiteUrl;
+                        }
+                    }, 1000); // Timeout for fallback
+                }
+
+                // Try to open the app
+                openApp();
+            }
+
+            redirectToAppOrStore();
+        });
     </script>
 </head>
 <body>
+    <p>If you are not redirected automatically, <a id="manual-link" href="#">click here</a>.</p>
+    <script>
+        document.getElementById('manual-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            redirectToAppOrStore();
+        });
+    </script>
 </body>
 </html>
+
+
+ -->
