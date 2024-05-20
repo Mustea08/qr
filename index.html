@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,7 +30,7 @@
     }
     document.addEventListener('DOMContentLoaded', getUserAgent);
   </script> -->
-  <script>
+<!--   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Define the custom URL scheme and URLs
       var appScheme = "scan://tabnav/home/open_with_deep_link/cabinet_id=1234"; // Replace with your app's custom URL scheme
@@ -84,7 +84,7 @@
   </script>
 </body>
 
-</html>
+</html> -->
 <!-- 
 
 <!DOCTYPE html>
@@ -144,3 +144,61 @@
 
 
  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Redirect</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var appScheme = "scan://tabnav/home/open_with_deep_link/cabinet_id=1234"; // Replace with your app's custom URL scheme
+            var playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury"; // Replace with your Android app's Play Store URL
+            var appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582"; // Replace with your iOS app's App Store URL
+            var websiteURL = "https://www.noury.ch/app-herunterladen"; // Replace with your website URL
+
+            function isAndroid() {
+                return /android/i.test(navigator.userAgent);
+            }
+
+            function isIOS() {
+                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            }
+
+            function redirectToApp() {
+                var now = Date.now();
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = appScheme;
+                document.body.appendChild(iframe);
+
+                setTimeout(function() {
+                    document.body.removeChild(iframe);
+                    // If the time hasn't changed much, it means the app wasn't opened
+                    if (Date.now() - now < 2000) {
+                        if (isAndroid()) {
+                            window.location.href = playStoreURL;
+                        } else if (isIOS()) {
+                            window.location.href = appStoreURL;
+                        } else {
+                            window.location.href = websiteURL;
+                        }
+                    }
+                }, 1500);
+            }
+
+            // Redirect to the app or appropriate store/website
+            if (isAndroid() || isIOS()) {
+                redirectToApp();
+            } else {
+                window.location.href = websiteURL;
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected automatically, <a href="https://yourwebsite.com">click here</a>.</p>
+</body>
+</html>
