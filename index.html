@@ -1,3 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0;url=scan://tabnav/home/open_with_deep_link/cabinet_id=if-1234" />
+  <title>App Redirect</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const appScheme = "scan://tabnav/home/open_with_deep_link/cabinet_id=1234"; // Replace with your app's custom URL scheme
+      const playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury"; // Replace with your Android app's Play Store URL
+      const appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582"; // Replace with your iOS app's App Store URL
+      const websiteURL = "https://www.noury.ch/app-herunterladen"; // Replace with your website URL
+      const userAgent = navigator.userAgent;
+
+      function isAndroid() {
+        return /android/i.test(userAgent);
+      }
+
+      function isiOS() {
+        return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+      }
+
+      function openApp() {
+        window.location.href = appScheme;
+        setTimeout(() => {
+          if (isiOS()) {
+            window.location.href = appStoreURL;
+          } else if (isAndroid()) {
+            window.location.href = playStoreURL;
+          } else {
+            window.location.href = websiteURL;
+          }
+        }, 1000); // Timeout for fallback
+      }
+
+      // Try to open the app
+      openApp();
+    });
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
+
+
+
+
+
+
+
 <!-- <!DOCTYPE html>
 <html lang="en">
 
@@ -145,7 +199,7 @@
 
  -->
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -201,4 +255,4 @@
     <h1>Redirecting...</h1>
     <p>If you are not redirected automatically, <a href="https://yourwebsite.com">click here</a>.</p>
 </body>
-</html>
+</html> -->
