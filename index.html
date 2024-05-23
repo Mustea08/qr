@@ -6,27 +6,46 @@
         <title>App Redirect</title>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const cabinet_id = new URLSearchParams(window.location.search).get('cabinet_id') || ""
-                const appScheme = `scan://splash/cabinet_id=${cabinet_id}`;
-                const playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury";
-                const appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582";
-                const websiteURL = "https://www.noury.ch/app-herunterladen";
-                const userAgent = navigator.userAgent;
-                const isAndroid = () => /android/i.test(userAgent);
-                const isiOS = () => /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-                const openApp = () => {
-                window.location.href = appScheme;
+              const cabinet_id = new URLSearchParams(window.location.search).get('cabinet_id') || "";
+              const appScheme = `scan://tabnav/home/openWithDeepLink/cabinet_id=${cabinet_id}`;
+              const playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury";
+              const appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582";
+              const websiteURL = "https://www.noury.ch/app-herunterladen";
+              const userAgent = navigator.userAgent;
+              const isAndroid = () => /android/i.test(userAgent);
+              const isiOS = () => /iPad|iPhone|iPod/.test(userAgent) &&!window.MSStream;
+
+              // Function to create and append an iframe
+              const createAndAppendIframe = (url) => {
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.width = "100%";
+                iframe.height = "100%";
+                document.body.appendChild(iframe);
+              };
+            
+              const openApp = () => {
+                // Assuming you want to open the app scheme first
+                createAndAppendIframe(appScheme);
+            
                 setTimeout(() => {
-                    if (isiOS()) {
+                  if (isiOS()) {
+                    // Clear the iframe and redirect to App Store
+                    document.body.innerHTML = '';
                     window.location.href = appStoreURL;
-                    } else if (isAndroid()) {
+                  } else if (isAndroid()) {
+                    // Clear the iframe and redirect to Play Store
+                    document.body.innerHTML = '';
                     window.location.href = playStoreURL;
-                    } else {
+                  } else {
+                    // Clear the iframe and redirect to the website
+                    document.body.innerHTML = '';
                     window.location.href = websiteURL;
-                    }
-                }, 3000);
-                };
-                openApp();
+                  }
+                }, 500);
+              };
+
+              openApp();
             });
         </script>
     </head>
