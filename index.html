@@ -16,16 +16,19 @@
       const isAndroid = () => /android/i.test(userAgent);
       const isiOS = () => /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
       const openApp = () => {
-        window.location.href = appScheme;
-        setTimeout(() => {
-          if (isiOS()) {
-            window.location.href = appStoreURL;
-          } else if (isAndroid()) {
-            window.location.href = playStoreURL;
-          } else {
-            window.location.href = websiteURL;
-          }
-        }, 500);
+        try {
+          window.location.href = appScheme;
+        } catch (e) { console.log('app not found')}
+          setTimeout(() => {
+            if (isiOS()) {
+              window.location.href = appStoreURL;
+            } else if (isAndroid()) {
+              window.location.href = playStoreURL;
+            } else {
+              window.location.href = websiteURL;
+            }
+          }, 500);
+
       };
       openApp();
     });
