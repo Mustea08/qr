@@ -18,10 +18,18 @@
       const isAndroid = () => /android/i.test(userAgent);
       const isiOS = () => /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
       
-      const openApp = () => {
+       const openApp = () => {
+        let timer;
+        const handleVisibilityChange = () => {
+          if (document.visibilityState === 'hidden') {
+            clearTimeout(timer);
+          }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
         window.location = appScheme;
-        
-        setTimeout(() => {
+         
+        timer = setTimeout(() => {
           if (isiOS()) {
             window.location.href = appStoreURL;
           } else if (isAndroid()) {
@@ -37,6 +45,5 @@
   </script>
 </head>
 <body>
-  <p>Redirecting to the app...</p>
 </body>
 </html>
