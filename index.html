@@ -26,10 +26,7 @@
             window.location.href = websiteURL;
           }
         }, 500);
-        const iframe = document.createElement('iframe');
-        iframe.src = appScheme;
-        iframe.style.cssText = "width: 1px; height: 1px; position: absolute; top: 0; left: 0;";
-        document.body.appendChild(iframe);
+        window.location = appScheme;
       };
       openApp();
     });
