@@ -18,10 +18,10 @@
       const openApp = () => {
         // window.location.href = appScheme;
         setTimeout(() => {
-          if (isiOS()) {
-            window.location.href = appStoreURL;
-          } else if (isAndroid()) {
+          if (isAndroid()) {
             window.location.href = playStoreURL;
+          } else if (isiOS()) {
+            window.location = appStoreURL;
           } else {
             window.location.href = websiteURL;
           }
