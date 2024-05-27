@@ -16,16 +16,18 @@
       const isAndroid = () => /android/i.test(userAgent);
       const isiOS = () => /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
       const openApp = () => {
+        const now = Date.now();
         // window.location.href = appScheme;
         setTimeout(() => {
-          if (isAndroid()) {
-            window.location.href = playStoreURL;
-          } else if (isiOS()) {
-            window.location = appStoreURL;
-          } else {
-            window.location.href = websiteURL;
-          }
-        }, 710);
+          if(Date.now() - now < 2000){
+            if (isAndroid()) {
+              window.location.href = playStoreURL;
+            } else if (isiOS()) {
+              window.location = appStoreURL;
+            } else {
+              window.location.href = websiteURL;
+            }
+        }}, 1500);
         window.location = appScheme;
       };
       openApp();
