@@ -12,6 +12,66 @@
       const dev = 'https://app.dev.noury.ch';
       const stage = 'https://app.stage.noury.ch';
       const playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury";
+      const appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582";
+      const websiteURL = "https://www.noury.ch/app-herunterladen";
+      const userAgent = navigator.userAgent;
+
+      const isAndroid = () => /android/i.test(userAgent);
+      const isiOS = () => /iPad|iPhone|iPod/.test(userAgent);
+      let app = '';
+      let appScheme = ''
+
+      if (window.location.origin === noury) {
+        app = 'noury';
+      } else if (window.location.origin === dev) {
+        app = 'nourydev';
+      } else {
+        app = 'nourystage';
+      }
+      if (cabinet_id) {
+        appScheme = `${app}://splash/cabinet_id=${cabinet_id}`;
+      } else {
+        appScheme = `${app}://splash`
+      }
+      const openApp = () => {
+
+        if (isAndroid()) {
+          window.location.href = appScheme;
+          setTimeout(() => {
+            window.location.replace(playStoreURL);
+          }, 500);
+        } else if (isiOS()) {
+          window.location.href = appStoreURL;
+        }
+        else {
+          window.location.href = websiteURL;
+        }
+      };
+
+      openApp();
+    });
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noury App</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cabinet_id = new URLSearchParams(window.location.search).get('cabinet_id') || "";
+      const noury = 'https://app.noury.ch';
+      const dev = 'https://app.dev.noury.ch';
+      const stage = 'https://app.stage.noury.ch';
+      const playStoreURL = "https://play.google.com/store/apps/details?id=ch.noury";
       const appStoreURL = "itms-apps://apps.apple.com/ch/app/noury/id1577361582";
       const websiteURL = "https://www.noury.ch/app-herunterladen";
       const userAgent = navigator.userAgent;
@@ -62,3 +122,4 @@
 </body>
 
 </html>
+ -->
