@@ -38,7 +38,7 @@
         if (isAndroid()) {
           window.location.href = appScheme;
           setTimeout(() => {
-            window.location.href = playStoreURL;
+            window.location.replace(playStoreURL);
           }, 500);
         } else if (isiOS()) {
           window.location.href = appStoreURL;
