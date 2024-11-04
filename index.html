@@ -12,7 +12,7 @@
       const noury = 'https://app.noury.ch';
       const dev = 'https://app.dev.noury.ch';
       const stage = 'https://app.stage.noury.ch';
-      const playStoreURL = 'market://launch?id=ch.noury';
+      const playStoreURL = 'market://details?id=ch.noury';
       const appStoreURL = "https://apps.apple.com/ch/app/noury/id1577361582";
       const websiteURL = "https://www.noury.ch/app-herunterladen";
       const userAgent = navigator.userAgent;
@@ -39,7 +39,7 @@
         if (isAndroid()) {
           window.location.href = appScheme;
            setTimeout(() => {
-              window.location.href = "market://details?id=ch.noury";            
+              window.open("market://details?id=ch.noury")           
             }, 100);
         } else if (isiOS()) {
           window.location.href = appStoreURL;
