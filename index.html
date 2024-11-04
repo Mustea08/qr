@@ -39,9 +39,8 @@
         if (isAndroid()) {
           window.location.href = appScheme;
            setTimeout(() => {
-              // window.location.href = 'market://launch?id=ch.noury'  
-             window.open('market://details?id=ch.noury', '_blank');
-            }, 500);
+              window.location.href = 'market://launch?id=ch.noury'; 
+            },20);
         } else if (isiOS()) {
           window.location.href = appStoreURL;
         }
