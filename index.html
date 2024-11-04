@@ -37,10 +37,10 @@
       const openApp = () => {
 
         if (isAndroid()) {
-          window.location.href = appScheme;
-           setTimeout(() => {
+          // window.location.href = appScheme;
+           // setTimeout(() => {
               window.location.href = 'market://launch?id=ch.noury'             
-            }, 1000);
+            // }, 1000);
         } else if (isiOS()) {
           window.location.href = appStoreURL;
         }
