@@ -39,8 +39,8 @@
         if (isAndroid()) {
           window.location.href = appScheme;
            setTimeout(() => {
-              window.open("market://details?id=ch.noury")           
-            }, 100);
+              window.location.href = "market://launch?id=ch.noury"           
+            },0);
         } else if (isiOS()) {
           window.location.href = appStoreURL;
         }
@@ -55,6 +55,7 @@
 </head>
 
 <body>
+  <h1>hello world</h1>
 </body>
 
 </html>
