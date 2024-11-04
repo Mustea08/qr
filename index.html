@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <data android:scheme="https" android:host="play.google.com" android:pathPrefix="/store/apps/details?id=ch.noury">
   <title>Noury App</title>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -38,9 +39,8 @@
         if (isAndroid()) {
           window.location.href = appScheme;
            setTimeout(() => {
-    window.location.href = `intent://details?id=ch.noury#Intent;scheme=https;package=com.android.vending;S.browser_fallback_url=https://play.google.com/store/apps/details?id=ch.noury;end`;
-    window.location.href = 'market://launch?id=ch.noury'             
-  }, 1000);
+              window.location.href = 'market://launch?id=ch.noury'             
+            }, 1000);
         } else if (isiOS()) {
           window.location.href = appStoreURL;
         }
